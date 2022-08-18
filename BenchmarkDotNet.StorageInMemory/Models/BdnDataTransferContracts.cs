@@ -74,5 +74,7 @@ public class Benchmark
     public string Parameters { get; set; }
     public string FullName { get; set; }
     public Statistics Statistics { get; set; }
+    
+    // No Measurements in BRIEF version of BenchmarkDotNet JSON report.
     public List<Measurement> Measurements { get; set; }
 }
