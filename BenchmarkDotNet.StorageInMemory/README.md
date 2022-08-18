@@ -6,10 +6,10 @@ This .NET Minimal API project works with InMemory Entity Framework and Docker su
 
 1. use `dotnet new webapi -minimal` to create a new project without unnecessary packages and files.
 
-```bash
-dotnet new webapi -minimal -o BenchmarkDotNet.StorageInMemory
-```
+    ```bash
+    dotnet new webapi -minimal -o BenchmarkDotNet.StorageInMemory
+    ```
 
-1. Add data transfer objects (DTOs) based on BenchmarkDotNet JSON results using [JSON2CSharp](https://json2csharp.com/). I've extended the some classes to include additional properties such as hostname and gitversion infos.
+2. Add data transfer objects (DTOs) based on BenchmarkDotNet JSON results using [JSON2CSharp](https://json2csharp.com/). I've extended the some classes to include additional properties such as hostname and gitversion infos.
 
-1. 
+3. Update `Program.cs` to include minimal API endpoints.
