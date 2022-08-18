@@ -35,6 +35,6 @@ docker run -p 8080:80 darkato/benchmarkdotnet.storageinmemory:1.0
 
 The greeting endpoint is hosted at http://localhost:8080.
 
-1. Install **Thunder Client** in Visual Studio Code.
+1. Install [**Thunder Client**](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) in Visual Studio Code.
 2. Import `thunder-collection_BenchmarkDotNet.StorageInMemory.json` into **Thunder Client** collections.
-3. Send the test HTTP requests.
+3. Send the test HTTP requests in `BenchmarkDotNet.StorageInMemory` collection.
