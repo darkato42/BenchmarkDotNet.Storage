@@ -2,13 +2,15 @@ using System.Globalization;
 using System.Text.Json;
 using BenchmarkDotNet.StorageInMemory;
 using BenchmarkDotNet.StorageInMemory.DTOs;
+using BenchmarkDotNet.StorageInMemory.Helpers;
+using BenchmarkDotNet.StorageInMemory.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using MinimalAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BenchmarkDotNetDb>(opt => 
     opt.UseInMemoryDatabase("BenchmarkDotNetDb"));
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 app.MapGet("/", () => "Your BenchmarkDotNet.StorageInMemory API is live!");
@@ -39,6 +41,8 @@ app.MapPost("/bdnresults", async (BdnResult bdnResult, BenchmarkDotNetDb db) =>
         Title = bdnResult.Title,
         Timestamp = timestamp,
         Hostname = bdnResult.HostEnvironmentInfo.Hostname,
+        HostEnvironmentInfoJson = JsonSerializer.Serialize(bdnResult.HostEnvironmentInfo),
+        GitVersion = bdnResult.GitVersion,
         Json = JsonSerializer.Serialize(bdnResult),
         Benchmarks = benchmarks
     };
@@ -57,12 +61,22 @@ app.MapGet("/bdnresults/{id}", async (int id, BenchmarkDotNetDb db) =>
         : Results.NotFound());
 
 // Get benchmarks by fullname and hostname
-app.MapGet("/benchmarks", async (string fullname, string hostname, BenchmarkDotNetDb db) =>
+app.MapGet("/benchmarks", async (string hostname, string fullname, BenchmarkDotNetDb db) =>
 {
     var benchmarks = await db.Benchmarks
-        .Where(b => b.FullName == fullname && b.BenchmarkAggregateResult.Hostname == hostname)
-        .ToListAsync<BenchmarkDto>();
+        .Where(b => b.FullName == fullname 
+                    && b.BenchmarkAggregateResult.Hostname == hostname)
+        .ToListAsync();
     return Results.Ok(benchmarks);
 });
+
+// Get all benchmarks
+app.MapGet("/benchmarks/all", async (BenchmarkDotNetDb db) =>
+{
+    var benchmarks = await db.Benchmarks.ToListAsync();
+    return Results.Ok(benchmarks);
+});
+
+app.MapControllers();
 
 app.Run();

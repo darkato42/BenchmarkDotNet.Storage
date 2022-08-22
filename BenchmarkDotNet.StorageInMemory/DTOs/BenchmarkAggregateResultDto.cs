@@ -10,6 +10,9 @@ public class BenchmarkAggregateResultDto
     public string Title { get; set; }
     public DateTime Timestamp { get; set; }
     public string Hostname { get; set; }
+    public string HostEnvironmentInfoJson { get; set; }
+    public GitVersion GitVersion { get; set; }
+    
     public string Json { get; set; }
     
     [JsonIgnore]

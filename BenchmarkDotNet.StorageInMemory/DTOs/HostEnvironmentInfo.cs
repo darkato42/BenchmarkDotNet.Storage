@@ -1,4 +1,6 @@
-﻿namespace MinimalAPI.Models;
+﻿using BenchmarkDotNet.StorageInMemory.Models;
+
+namespace BenchmarkDotNet.StorageInMemory.DTOs;
 
 public class HostEnvironmentInfo
 {

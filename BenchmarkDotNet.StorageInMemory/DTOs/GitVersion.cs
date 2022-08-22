@@ -1,7 +1,10 @@
-﻿namespace MinimalAPI.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BenchmarkDotNet.StorageInMemory.DTOs;
 
 public class GitVersion
 {
+    public int Id { get; set; }
     public int Major { get; set; }
     public int Minor { get; set; }
     public int Patch { get; set; }
@@ -9,6 +12,7 @@ public class GitVersion
     public string PreReleaseTagWithDash { get; set; }
     public string PreReleaseLabel { get; set; }
     public string PreReleaseLabelWithDash { get; set; }
+    [NotMapped]
     public object PreReleaseNumber { get; set; }
     public int WeightedPreReleaseNumber { get; set; }
     public int BuildMetaData { get; set; }

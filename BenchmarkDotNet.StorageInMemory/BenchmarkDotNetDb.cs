@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BenchmarkDotNet.StorageInMemory;
 
-class BenchmarkDotNetDb : DbContext
+public class BenchmarkDotNetDb : DbContext
 {
     public BenchmarkDotNetDb(DbContextOptions<BenchmarkDotNetDb> options)
         : base(options) { }

@@ -1,4 +1,4 @@
-﻿namespace MinimalAPI.Models;
+﻿namespace BenchmarkDotNet.StorageInMemory.Models;
 
 public class ChronometerFrequency
 {

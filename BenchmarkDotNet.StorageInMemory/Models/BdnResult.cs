@@ -1,4 +1,6 @@
-﻿namespace MinimalAPI.Models;
+﻿using BenchmarkDotNet.StorageInMemory.DTOs;
+
+namespace BenchmarkDotNet.StorageInMemory.Models;
 
 public class BdnResult
 {

@@ -1,0 +1,22 @@
+﻿@model BenchmarkDotNet.StorageInMemory.Models.SvgViewModel
+
+<svg xmlns="http://www.w3.org/2000/svg" width="@(Model.SvgWidth + 200)" height="@Model.SvgHeight" viewBox="-50 0 @(Model.SvgWidth+150) @Model.SvgHeight">
+    <text transform="translate(-50,@(Model.YZero+20))">Versions</text>
+    @* <line x1="0" y1="@Model.YZero" x2="@Model.XEnd" y2="@Model.YZero" style="stroke:black;stroke-width:2" /> *@
+    
+    <text x="@(Model.XEnd-50)" y="15">Time</text>
+    <line x1="@Model.XEnd" y1="0" x2="@Model.XEnd" y2="@Model.YZero" style="stroke:black;stroke-width:2" />
+    <polyline points="@Model.PointList"
+              style="fill:none;stroke:blueviolet;stroke-width:2"/>
+
+    <text x="@(Model.XEnd+5)" y="@Model.YMin">@($"{Model.Min / 1000000:F1}") ms</text>
+    <text x="@(Model.XEnd+5)" y="@Model.YPos(Model.Max)">@($"{Model.Max / 1000000:F1}") ms</text>
+    
+    @foreach (var (idx, x, y) in @Model.Points)
+    {
+        <circle cx="@x" cy="@y" r="3" fill="violet" onclick="alert('@Model.Benchmarks[idx].BenchmarkAggregateResult.GitVersion.FullSemVer')"/>
+        @: <text transform="translate(@x,@Model.SvgHeight) rotate(340)" font-size="smaller">@Model.GitVersions[idx].FullSemVer</text>
+        @: <text transform="translate(@(x+40),@Model.SvgHeight) rotate(340)" font-size="smaller">@Model.Benchmarks[idx].BenchmarkAggregateResult.Timestamp</text>
+        @* @: <text transform="translate(@x,@Model.SvgHeight) rotate(340)">@Model.Benchmarks[idx].BenchmarkAggregateResult.Timestamp</text> *@
+    }
+</svg>
