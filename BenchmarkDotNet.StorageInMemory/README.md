@@ -27,6 +27,8 @@ This .NET Minimal API project works with InMemory Entity Framework and Docker su
 
 ## Run docker image from Docker Hub
 
+`-p 8080:80` forwards `localhost:8080` to docker container's port `80`.
+
 ```bash
 docker run -p 8080:80 darkato/benchmarkdotnet.storageinmemory:1.0
 ```
